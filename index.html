@@ -1,136 +1,40 @@
 <!doctype html>
 <html style="background-color: #fcb1e3;">
     <head>
-        <style>
-            * {
-                font-family: arial
-            }
-
-            h1 {
-                text-align: center;
-                display: block;
-                margin: 0px;
-                width: -webkit-fill-available;
-                font-size: 40px;
-            }
-
-            p {
-                font-size: 20px;
-            }
-
-            button, a {
-                margin: 2px;
-                background-color: #ffffff;
-                border-color: #FF0000;
-                border-style: solid;
-                border-width: 3px;
-                padding-inline: 7px;padding-block: 5px;font-family: arial;
-                font-size: 20px;
-                font-weight: bold;
-                cursor: pointer;
-                outline: none !important;
-                text-decoration: none;
-                color: #000000;
-            }
-
-            button[not-button] {
-                border-style: none;
-                background: none;
-                font-family: revert;
-                cursor: revert;
-                font-size: revert;
-                translate: revert;
-            }
-
-            [copyright], [copyright]::after {
-                font-size: 15px;
-                content: "©2025 le pripri • tout droits réservé"
-            }
-
-            a [img], button [img] {
-                width: 250px;
-                height: 150px;
-                background-repeat: no-repeat;
-                background-size: 250px;
-            }
-
-            a, button {
-                display: flex;
-                flex-direction: column;
-                width: 250px;
-                font-size: 15px;
-                word-break: break-all;
-            }
-
-            [img="framexplorer"] {
-                background-image: url("assets/framexplorer.png");
-            }
-
-            [img="converter"] {
-                background-image: url("assets/converter.png");
-            }
-
-            div.all.buttons {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-            }
-            .all.buttons :not(:hover) .abuttons {
-                display: none;
-            }
-
-            @media (max-width: 2080px) {
-                div.all.buttons {
-                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-                }
-            }
-
-            @media (max-width: 1700px) {
-                div.all.buttons {
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
-                }
-            }
-
-            @media (max-width: 1150px) {
-                div.all.buttons {
-                    grid-template-columns: 1fr 1fr 1fr;
-                }
-            }
-
-            @media (max-width: 847px) {
-                div.all.buttons {
-                    grid-template-columns: 1fr 1fr;
-                }
-            }
-
-            @media (max-width: 563px) {
-                div.all.buttons {
-                    grid-template-columns: 1fr;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <section>
-            <article>
-                <h1>tous les outils le pripri pratiques</h1>
-                <p>
-                    Des outils pratique pour votre vie au quotidien, le travail, ... de bonne qualité et utiles. Plus de 1 outil vous est à disposition<br>
-                    Utilisez ces outils le pripri gratuitement sans publicité et sans revente de données (si avez un doute, le serveur le pripri en est incapble), toutes données sont sauvgarées sur vottre ordinateur.
-                    <em copyright="">ces outils sont couvert par </em>
-                </p>
-            </article>
-            <div class="all buttons">
-                <a id="framexplorer" title="une image précide dans une vidéo" aria-label="frame explorer" href="https://lepripri.github.io/frame-explorer/">
-                    <div img="framexplorer" role="img"></div>
-                    frame explorer, une image précide dans une vidéo
-                </a>
-                <a id="converter" title="convertiseur pour baladeur mp4" aria-label="converter" href="https://lepripri.github.io/converter/">
-                    <div img="converter" role="img"></div>
-                    convertiseur pour baladeur mp4
-                </a>
-            </div>
-        </section>
-        <script type="module" src="https://lepripri.github.io/module.js"></script>
         <script src="https://lepripri.github.io/allPages.js"></script>
-    </body>
+        <script>
+            var translation = {
+                test: {
+                    fr: true,
+                    en: true
+                },
+                title: {
+                    fr: "tous les outils le pripri pratiques",
+                    en: "all le pripri tools"
+                },
+                description: {
+                    fr: "Des outils pratique pour votre vie au quotidien, le travail, ... de bonne qualité et utiles. Plus de 1 outil vous est à disposition\
+Utilisez ces outils le pripri gratuitement sans publicité et sans revente de données (si avez un doute, le serveur le pripri en est incapble), toutes données sont sauvgarées sur vottre ordinateur",
+                    en: "Practical, high-quality, and useful tools for your daily life, work, and more. A variety of tools are available for you to use.\
+Use these tools completely free of charge & no advertisements, and no selling of your data (the server itself is incapable of doing so and it is writen in the le pripri politicy). All your data is saved locally on your own computer."
+                },
+                converter: {
+                    fr: "convertiseur pour baladeur mp4",
+                    en: "converter for mp3/mp4 player"
+                }
+            }
+            if (translation.test[localStorage.lang.substring(0, 2)]) {
+                var lang = localStorage.lang.substring(0, 2)
+            } else {
+                var lang = "en"
+            }
+            lepripriAPI.import.pageCreatorEditor();
+            var changer = lepripriAPI.imported.API.currentPage.change
+            changer.presetLppPage("itemlist", 'big', translation.title[lang], changer.pressetType.itemList.parrametters("", "", translation.description[lang], [
+                changer.pressetType.itemList.generateItem("framexplorer", "frame explorer", "/frame-explorer/", "assets/framexplorer.png"),
+                changer.pressetType.itemList.generateItem("converter", translation.converter[lang], "/converter/", "assets/converter.png")
+            ]));
+        </script>
+    </head>
+    <body></body>
 </html>
